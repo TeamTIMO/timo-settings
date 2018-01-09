@@ -1,0 +1,6 @@
+{
+	"nightmode":"true",
+	"nightmode_start":"20:00",
+	"nightmode_end":"08:00",
+	"nightmode_days":"1-7"
+}

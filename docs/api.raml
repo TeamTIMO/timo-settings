@@ -1,0 +1,49 @@
+#%RAML 1.0
+title: Timo-Settings
+version: 1
+mediaType:  application/json
+baseUri: http://{server}:{port}
+baseUriParameters:
+  server:
+    description: The Server Running this
+    example: 10.14.210.114
+    required: true
+    default: 10.14.210.114
+  port:
+    description: The Server Port
+    example: 7878
+    required: true
+    default: 7878
+protocols: [ HTTP ]
+/:
+  displayName: Settings
+  description: Get all Settings
+  get:
+    responses:
+      200:
+        body:
+          application/json:
+            type: Object
+            example: |
+              {
+                "nightmode":"true",
+                "nightmode_start":"20:00",
+                "nightmode_end":"08:00",
+                "nightmode_days":"1-7"
+              }
+  /{settingName}:
+    displayName: Setting
+    description: A Single Setting Value
+    uriParameters:
+      settingName:
+        displayName: Setting name
+        type: string
+    put:
+      body:
+        application/json:
+          type: String
+      responses:
+        200:
+          body:
+            application/json:
+              type: String

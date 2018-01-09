@@ -1,0 +1,46 @@
+@startuml
+actor User
+participant App
+participant Settings
+database Memory
+collections FS
+autonumber
+
+activate App
+App -> Settings: new
+activate Settings
+Settings -> FS: loadFile
+activate FS
+FS -> Settings: JSON
+deactivate FS
+Settings -> Memory: save JSON
+activate Memory
+Settings -> App: Started
+
+User -> App: List Settings
+App -> Settings: list()
+Settings -> Memory: get Object
+Memory -> Settings: Object
+Settings -> App: Object
+App -> User: json(Object)
+
+== Get Setting ==
+User -> App: List Settings by Name
+App -> Settings: getSetting(name)
+Settings -> Memory: get Object.name
+Memory -> Settings: value
+Settings -> App: value
+App -> User: json(value)
+
+== Update Setting ==
+User -> App: Update Setting (name, value)
+App -> Settings: updateSetting()
+Settings -> Memory: set Object.name
+Memory -> Settings: value
+Settings -> FS: save File
+activate FS
+FS -> Settings: OK
+deactivate FS
+Settings -> App: value
+App -> User: json(value)
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class settings {
+  - Object settings
+  - String file
+  + {method} void list(callback: function)
+  + {method} void getSetting(String: name, callback: function)
+  + {method} void updateSetting(String: name, String: Value, callback: function)
+  - {method} void saveFile(callback: function)
+}
+@enduml
